@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ContactModule } from './contact/contact.module';
 import { AgreementsModule } from './agreements/agreements.module';
+import { TemplatesModule } from './templates/templates.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AgreementsModule } from './agreements/agreements.module';
     }),
     ContactModule,
     AgreementsModule,
+    TemplatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

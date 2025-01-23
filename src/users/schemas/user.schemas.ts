@@ -18,6 +18,9 @@ export class User extends Document {
   @Prop({ default: 0 })
   tokenVersion: number;
 
+  @Prop({ required: false })
+  companyName: string;
+
   @Prop({ default: () => Date.now() })
   createdAt: Date;
 }
