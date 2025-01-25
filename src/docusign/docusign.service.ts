@@ -127,17 +127,22 @@ export class DocusignService {
   }
 
   async getActiveTokenForUser(userId: string): Promise<AuthToken | null> {
-    const activeToken = this.authTokenModel.findOne({
-      userId,
-      expiresAt: { $gt: new Date() }
-    });
-
-    if(!activeToken){
-      const existingToken = await this.authTokenModel.findOne({ userId });
-      const newToken = await this.refreshAccessToken({code:existingToken.refreshToken, user_id:existingToken.userId});
-      return newToken
+    try {
+      const activeToken = this.authTokenModel.findOne({
+        userId,
+        expiresAt: { $gt: new Date() }
+      });
+      console.log(activeToken)
+  
+      if(!activeToken){
+        const existingToken = await this.authTokenModel.findOne({ userId });
+        const newToken = await this.refreshAccessToken({code:existingToken.refreshToken, user_id:existingToken.userId});
+        return newToken
+      }
+      return await activeToken;
+    } catch (error) {
+      return null
     }
-    return await activeToken;
   }
 
 
