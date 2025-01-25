@@ -36,7 +36,7 @@ export class TemplatesService {
 
   private async initializePredefinedTemplates() {
     // Iterate through predefined templates and add only if not already present
-    PREDEFINED_TEMPLATES.forEach(async (template) => {
+    for (const template of PREDEFINED_TEMPLATES) {
       const existingTemplate = await this.templateModel.findOne({
         $or: [
           { id: template.id },
@@ -48,11 +48,12 @@ export class TemplatesService {
       });
 
       if (!existingTemplate) {
+        // Retain the sections and signature locations from the predefined template
         const predefinedTemplate: Partial<TemplateBase> = {
           ...template,
-          version: '1.0.0',
-          sections: [],
-          defaultSignatureLocations: [],
+          version: template.version || '1.0.0', // Preserve the version if defined
+          sections: template.sections || [], // Ensure sections are preserved
+          defaultSignatureLocations: template.defaultSignatureLocations || [], // Preserve signature locations
           metadata: {
             ...template.metadata,
             lastUpdated: new Date(),
@@ -61,10 +62,12 @@ export class TemplatesService {
           },
         };
 
-        await this.templateModel.create(predefinedTemplate);
+        // Create the new template in the database
+        await this.templateModel.create(predefinedTemplate); 
       }
-    });
+    }
   }
+
 
   private mergeCustomSections(
     baseSections: TemplateSection[],

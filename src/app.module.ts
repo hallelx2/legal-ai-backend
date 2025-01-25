@@ -8,7 +8,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ContactModule } from './contact/contact.module';
 import { AgreementsModule } from './agreements/agreements.module';
 import { TemplatesModule } from './templates/templates.module';
+<<<<<<< HEAD
+import { AiGeneratorService } from './ai-generator/ai-generator.service';
+import { OpenaiService } from './openai/openai.service';
+=======
 import { DocusignModule } from './docusign/docusign.module';
+>>>>>>> e33aef71d2f75356e56bf33ab391be620ae2f090
 
 @Module({
   imports: [
@@ -31,6 +36,6 @@ import { DocusignModule } from './docusign/docusign.module';
     DocusignModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AiGeneratorService, OpenaiService],
 })
 export class AppModule {}
