@@ -8,6 +8,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ContactModule } from './contact/contact.module';
 import { AgreementsModule } from './agreements/agreements.module';
 import { TemplatesModule } from './templates/templates.module';
+import { AiGeneratorService } from './ai-generator/ai-generator.service';
+import { OpenaiService } from './openai/openai.service';
 
 @Module({
   imports: [
@@ -29,6 +31,6 @@ import { TemplatesModule } from './templates/templates.module';
     TemplatesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AiGeneratorService, OpenaiService],
 })
 export class AppModule {}

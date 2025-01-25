@@ -10,7 +10,7 @@ import { TemplateCategory } from './template.enum';
 @Schema({ timestamps: true })
 export class TemplateBase extends Document {
   @Prop({ required: true, unique: true })
-  id: string;
+  id: string; 
 
   @Prop({ required: true })
   name: string;

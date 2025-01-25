@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateAgreementDto } from './create-agreement.dto';
+import { AgreementGenerationDto } from './create-agreement.dto';
 
-export class UpdateAgreementDto extends PartialType(CreateAgreementDto) {}
+export class UpdateAgreementDto extends PartialType(AgreementGenerationDto) {}
