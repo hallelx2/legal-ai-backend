@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ContactModule } from './contact/contact.module';
 import { AgreementsModule } from './agreements/agreements.module';
 import { TemplatesModule } from './templates/templates.module';
+import { DocusignModule } from './docusign/docusign.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TemplatesModule } from './templates/templates.module';
     ContactModule,
     AgreementsModule,
     TemplatesModule,
+    DocusignModule,
   ],
   controllers: [AppController],
   providers: [AppService],
