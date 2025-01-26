@@ -134,11 +134,10 @@ export class DocusignService {
 
   async getActiveTokenForUser(userId: string): Promise<AuthToken | null> {
     try {
-      const activeToken = this.authTokenModel.findOne({
+      const activeToken = await this.authTokenModel.findOne({
         userId,
         expiresAt: { $gt: new Date() },
-      });
-      console.log(activeToken);
+      })
 
       if (!activeToken) {
         const existingToken = await this.authTokenModel.findOne({ userId });

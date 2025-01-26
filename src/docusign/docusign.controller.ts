@@ -17,6 +17,10 @@ export class CodeDto {
   user_id: string;
 }
 
+export class ConnectedDTO{
+  connected:boolean
+}
+
 @Controller('docusign')
 export class DocusignController {
   constructor(private readonly docusignService: DocusignService) {}
@@ -29,5 +33,12 @@ export class DocusignController {
   @Post('refresh')
   refresh(@Body() body: CodeDto) {
     return this.docusignService.refreshAccessToken(body);
+  }
+
+  @Get('token/:id')
+  async getTokenConnected(@Param('id') id: string): Promise<ConnectedDTO> {
+    const token =await this.docusignService.getActiveTokenForUser(id)
+    if(!token) return {connected:false}
+    return {connected:true}
   }
 }
