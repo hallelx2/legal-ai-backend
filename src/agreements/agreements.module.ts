@@ -12,6 +12,7 @@ import {
   TemplateBaseSchema,
 } from 'src/templates/template-base.schema';
 import { Agreement, AgreementSchema } from './schemas/agreement.schemas';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { Agreement, AgreementSchema } from './schemas/agreement.schemas';
     AiGeneratorService,
     TemplatesService,
     OpenaiService,
+    JwtService
   ],
   exports: [TemplatesService],
 })
