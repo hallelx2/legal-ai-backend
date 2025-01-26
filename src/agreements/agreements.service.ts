@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AgreementDocument, Agreement } from './schemas/agreement.schemas';
@@ -17,7 +21,9 @@ export class AgreementsService {
 
   async generateAgreement(dto: AgreementGenerationDto) {
     // Fetch and validate template
-    const template = await this.templatesService.getTemplateById(dto.templateId);
+    const template = await this.templatesService.getTemplateById(
+      dto.templateId,
+    );
 
     // Validate input against template
     this.validateInputAgainstTemplate(template, dto);
@@ -97,7 +103,7 @@ export class AgreementsService {
     return this.agreementModel.findByIdAndUpdate(
       id,
       { 'metadata.status': status },
-      { new: true }
+      { new: true },
     );
   }
 
@@ -150,17 +156,23 @@ export class AgreementsService {
         <p>Version: ${template.version}</p>
         <p>Jurisdiction: ${template.metadata.jurisdiction}</p>
 
-        ${sections.map(section => `
+        ${sections
+          .map(
+            (section) => `
           <div class="section" data-section-id="${section.id}">
             <h2>${section.title}</h2>
             <div class="section-content">
               ${section.content}
             </div>
           </div>
-        `).join('')}
+        `,
+          )
+          .join('')}
 
         <div class="signature-section">
-          ${signatureLocations.map(loc => `
+          ${signatureLocations
+            .map(
+              (loc) => `
             <div class="signature-container"
                  style="left: ${loc.x}px; top: ${loc.y}px;">
               <div class="signature-line"></div>
@@ -169,7 +181,9 @@ export class AgreementsService {
                 ${loc.required ? '(Required)' : '(Optional)'}
               </div>
             </div>
-          `).join('')}
+          `,
+            )
+            .join('')}
         </div>
       </div>
     `;
