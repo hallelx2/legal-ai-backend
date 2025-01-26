@@ -2,32 +2,28 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as CryptoJS from 'crypto-js';
 
-
-
 @Schema({ timestamps: true })
 export class AuthToken extends Document {
   @Prop({ required: true })
   userId: string;
 
-  @Prop({ 
+  @Prop({
     required: true,
     set: (token: string) => encryptToken(token),
-    get: (encryptedToken: string) => decryptToken(encryptedToken)
-
-   })
+    get: (encryptedToken: string) => decryptToken(encryptedToken),
+  })
   accessToken: string;
 
-  @Prop({ 
+  @Prop({
     required: true,
     set: (token: string) => encryptToken(token),
-    get: (encryptedToken: string) => decryptToken(encryptedToken)
-   })
+    get: (encryptedToken: string) => decryptToken(encryptedToken),
+  })
   refreshToken: string;
 
   @Prop({ required: true })
   expiresAt: Date;
 }
-
 
 function getEncryptionKey(): string {
   // Retrieve encryption key from environment variable

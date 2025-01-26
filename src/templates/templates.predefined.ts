@@ -407,7 +407,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
   {
     id: 'comprehensive-employment-contract',
     name: 'Comprehensive Employment Agreement',
-    description: 'Detailed employment contract covering all critical aspects of employment, including compensation, responsibilities, confidentiality, and termination conditions',
+    description:
+      'Detailed employment contract covering all critical aspects of employment, including compensation, responsibilities, confidentiality, and termination conditions',
     version: '2.0.0',
     category: TemplateCategory.EMPLOYMENT,
     sections: [
@@ -416,16 +417,18 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Employee and Company Identification',
         required: true,
         order: 1,
-        aiPrompt: 'Provide comprehensive details about the employee and employing organization',
+        aiPrompt:
+          'Provide comprehensive details about the employee and employing organization',
         variables: [
           {
             id: 'employee_full_legal_name',
             name: 'Employee Full Legal Name',
             type: 'string',
             required: true,
-            description: 'Complete legal name as it appears on official identification',
+            description:
+              'Complete legal name as it appears on official identification',
             validation: {
-              pattern: '^[A-Za-z\\s\\-\']{2,50}$',
+              pattern: "^[A-Za-z\\s\\-']{2,50}$",
             },
           },
           {
@@ -433,7 +436,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Tax Identification Number',
             type: 'string',
             required: true,
-            description: 'Social Security Number or equivalent tax identification',
+            description:
+              'Social Security Number or equivalent tax identification',
             validation: {
               pattern: '^\\d{9}$',
             },
@@ -450,7 +454,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Company Registration Number',
             type: 'string',
             required: true,
-            description: 'Official business registration or incorporation number',
+            description:
+              'Official business registration or incorporation number',
           },
         ],
       },
@@ -459,7 +464,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Comprehensive Employment Terms',
         required: true,
         order: 2,
-        aiPrompt: 'Define detailed employment parameters including position, compensation, and classification',
+        aiPrompt:
+          'Define detailed employment parameters including position, compensation, and classification',
         variables: [
           {
             id: 'job_title',
@@ -483,7 +489,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Annual Base Compensation',
             type: 'number',
             required: true,
-            description: 'Total annual salary before bonuses or additional compensation',
+            description:
+              'Total annual salary before bonuses or additional compensation',
             validation: {
               min: 30000,
               max: 1000000,
@@ -494,7 +501,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Performance Bonus Potential',
             type: 'number',
             required: false,
-            description: 'Maximum potential bonus as a percentage of base salary',
+            description:
+              'Maximum potential bonus as a percentage of base salary',
             validation: {
               min: 0,
               max: 100,
@@ -505,7 +513,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Equity Compensation',
             type: 'boolean',
             required: true,
-            description: 'Indicates whether stock options or equity grants are part of compensation',
+            description:
+              'Indicates whether stock options or equity grants are part of compensation',
           },
         ],
       },
@@ -514,28 +523,32 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Confidentiality and Intellectual Property Agreement',
         required: true,
         order: 3,
-        aiPrompt: 'Elaborate on confidentiality expectations and intellectual property assignments',
+        aiPrompt:
+          'Elaborate on confidentiality expectations and intellectual property assignments',
         variables: [
           {
             id: 'confidentiality_scope',
             name: 'Confidentiality Definition',
             type: 'array',
             required: true,
-            description: 'Comprehensive list of what constitutes confidential information',
+            description:
+              'Comprehensive list of what constitutes confidential information',
           },
           {
             id: 'ip_assignment_scope',
             name: 'Intellectual Property Assignment',
             type: 'array',
             required: true,
-            description: 'Types of intellectual property covered by the agreement',
+            description:
+              'Types of intellectual property covered by the agreement',
           },
           {
             id: 'non_compete_duration',
             name: 'Non-Compete Duration (months)',
             type: 'number',
             required: false,
-            description: 'Duration of non-competitive restrictions post-employment',
+            description:
+              'Duration of non-competitive restrictions post-employment',
             validation: {
               min: 0,
               max: 24,
@@ -548,14 +561,16 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Termination and Separation Terms',
         required: true,
         order: 4,
-        aiPrompt: 'Define comprehensive termination conditions and separation protocols',
+        aiPrompt:
+          'Define comprehensive termination conditions and separation protocols',
         variables: [
           {
             id: 'notice_period',
             name: 'Termination Notice Period',
             type: 'number',
             required: true,
-            description: 'Weeks of notice required for voluntary or involuntary termination',
+            description:
+              'Weeks of notice required for voluntary or involuntary termination',
             validation: {
               min: 1,
               max: 12,
@@ -599,7 +614,7 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         'Comprehensive Contract',
         'Technology Sector',
         'Intellectual Property',
-        'Compensation Agreement'
+        'Compensation Agreement',
       ],
       status: 'published',
     },
@@ -610,7 +625,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
   {
     id: 'technology-transfer-agreement',
     name: 'Comprehensive Technology Transfer and Licensing Agreement',
-    description: 'Detailed agreement governing the transfer, licensing, and usage rights of technological innovations between organizations',
+    description:
+      'Detailed agreement governing the transfer, licensing, and usage rights of technological innovations between organizations',
     version: '2.0.0',
     category: TemplateCategory.INTELLECTUAL_PROPERTY,
     sections: [
@@ -619,14 +635,16 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Technological Asset Identification',
         required: true,
         order: 1,
-        aiPrompt: 'Provide comprehensive details about the technological assets being transferred',
+        aiPrompt:
+          'Provide comprehensive details about the technological assets being transferred',
         variables: [
           {
             id: 'technology_name',
             name: 'Official Technology Name',
             type: 'string',
             required: true,
-            description: 'Precise name of the technological asset or innovation',
+            description:
+              'Precise name of the technological asset or innovation',
           },
           {
             id: 'patent_numbers',
@@ -670,7 +688,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
             name: 'Geographic Usage Rights',
             type: 'array',
             required: true,
-            description: 'Regions or countries where technology can be utilized',
+            description:
+              'Regions or countries where technology can be utilized',
           },
           {
             id: 'licensing_fee_structure',
@@ -724,7 +743,7 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         'Intellectual Property',
         'Technology Transfer',
         'Licensing Agreement',
-        'Innovation Rights'
+        'Innovation Rights',
       ],
       status: 'published',
     },
@@ -737,7 +756,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
   {
     id: 'commercial-lease-agreement',
     name: 'Comprehensive Commercial Property Lease Contract',
-    description: 'Detailed lease agreement for commercial real estate, covering complex tenancy requirements',
+    description:
+      'Detailed lease agreement for commercial real estate, covering complex tenancy requirements',
     version: '2.0.0',
     category: TemplateCategory.REAL_ESTATE,
     sections: [
@@ -746,14 +766,16 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Precise Property Identification',
         required: true,
         order: 1,
-        aiPrompt: 'Provide exhaustive details about the commercial property being leased',
+        aiPrompt:
+          'Provide exhaustive details about the commercial property being leased',
         variables: [
           {
             id: 'property_full_address',
             name: 'Complete Property Address',
             type: 'string',
             required: true,
-            description: 'Exact location including street, city, state, zip code',
+            description:
+              'Exact location including street, city, state, zip code',
           },
           {
             id: 'property_classification',
@@ -768,7 +790,7 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
                 'Industrial',
                 'Warehouse',
                 'Mixed-Use',
-                'Restaurant'
+                'Restaurant',
               ],
             },
           },
@@ -790,7 +812,8 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         title: 'Comprehensive Financial Lease Parameters',
         required: true,
         order: 2,
-        aiPrompt: 'Define intricate financial terms governing the commercial lease',
+        aiPrompt:
+          'Define intricate financial terms governing the commercial lease',
         variables: [
           {
             id: 'base_rent_amount',
@@ -852,7 +875,7 @@ export const PREDEFINED_TEMPLATES: TemplateType[] = [
         'Commercial Lease',
         'Property Rental',
         'Business Tenancy',
-        'Real Estate Contract'
+        'Real Estate Contract',
       ],
       status: 'published',
     },

@@ -1,4 +1,4 @@
-import { TemplateCategory } from "src/templates/template.enum";
+import { TemplateCategory } from 'src/templates/template.enum';
 
 export interface TemplateSection {
   id: string;
@@ -33,14 +33,13 @@ export interface SignatureLocation {
 }
 
 export interface TemplateMetadata {
-    industry: string;
-    jurisdiction: string;
-    lastUpdated: Date | string; // Use ISO string or Date
-    isCustom: boolean;
-    tags: string[];
-    status: 'published' | 'draft';
-  }
-
+  industry: string;
+  jurisdiction: string;
+  lastUpdated: Date | string; // Use ISO string or Date
+  isCustom: boolean;
+  tags: string[];
+  status: 'published' | 'draft';
+}
 
 export interface TemplateType {
   id: string;

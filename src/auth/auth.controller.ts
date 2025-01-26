@@ -26,7 +26,7 @@ export class AuthController {
     description: 'Validation failed or email already exists',
   })
   async register(@Body() createUserDto: CreateUserDto) {
-    console.log("hit")
+    console.log('hit');
     return this.usersService.register(createUserDto);
   }
 

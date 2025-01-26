@@ -63,11 +63,10 @@ export class TemplatesService {
         };
 
         // Create the new template in the database
-        await this.templateModel.create(predefinedTemplate); 
+        await this.templateModel.create(predefinedTemplate);
       }
     }
   }
-
 
   private mergeCustomSections(
     baseSections: TemplateSection[],
