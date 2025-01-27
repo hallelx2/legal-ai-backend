@@ -9,6 +9,7 @@ import { AgreementDocument, Agreement } from './schemas/agreement.schemas';
 import { AgreementGenerationDto } from './dto/create-agreement.dto';
 import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
 import { TemplatesService } from 'src/templates/templates.service';
+import { agreementCss } from './agreements.css';
 
 @Injectable()
 export class AgreementsService {
@@ -147,11 +148,13 @@ export class AgreementsService {
   }
 
   private generateAgreementHtml(template, sections, signatureLocations) {
-    // HTML generation logic from previous implementation
-    const agreementCSS = `...`; // CSS remains the same
-
     const htmlContent = `
-      ${agreementCSS}
+    <!DOCTYPE html>
+    <html>
+    <header>
+      ${agreementCss}
+      </header>
+      <body>
       <div class="agreement-container">
         <h1>${template.name}</h1>
         <p>Version: ${template.version}</p>
@@ -187,6 +190,8 @@ export class AgreementsService {
             .join('')}
         </div>
       </div>
+      </body>
+      </html>
     `;
 
     return htmlContent;
