@@ -24,8 +24,6 @@ export class DocusignService {
 
   async createToken(CodeDto: CodeDto) {
     const authorization = btoa(`${this.CLIENT_ID}:${this.CLIENT_SECRET}`);
-    console.log(authorization);
-    console.log(CodeDto.code);
     try {
       const response = await fetch(
         `https://account-d.docusign.com/oauth/token`,
@@ -48,7 +46,6 @@ export class DocusignService {
         throw new Error('code expired');
       }
       const data = await response.json();
-      console.log(data);
       return await this.saveTokens(
         CodeDto.user_id,
         data.access_token,
@@ -68,8 +65,6 @@ export class DocusignService {
     expiresIn: number,
   ): Promise<AuthToken> {
     // Remove existing tokens for the user
-    console.log(userId, accessToken);
-
     await this.authTokenModel.deleteMany({ userId });
 
     // Create new token entry
@@ -110,7 +105,6 @@ export class DocusignService {
     // This is where you'd make an HTTP request to get new tokens
     // Returns an object with { accessToken, refreshToken, expiresIn }
     const authorization = btoa(`${this.CLIENT_ID}:${this.CLIENT_SECRET}`);
-    console.log(authorization);
     try {
       const response = await fetch(
         `https://account-d.docusign.com/oauth/token`,
