@@ -21,6 +21,8 @@ export class Agreement {
   metadata: {
     jurisdiction?: string;
     status?: 'draft' | 'generated' | 'sent' | 'signed';
+    docusignEnvelopeId?: string;
+    docusignStatus?: string | boolean;
   };
 
   @Prop({ type: [Object] })

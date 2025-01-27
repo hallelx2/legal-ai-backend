@@ -2,6 +2,7 @@ import {
   Injectable,
   BadRequestException,
   NotFoundException,
+  Logger,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model} from 'mongoose';
@@ -11,6 +12,27 @@ import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
 import { TemplatesService } from 'src/templates/templates.service';
 import { agreementCss } from './agreements.css';
 import { marked } from 'marked';
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import * as docusign from 'docusign-esign';
+// import * as puppeteer from 'puppeteer';
+// import { DocusignService } from 'src/docusign/docusign.service';
+
+interface EnvelopeStatus {
+  envelopeId: string;
+  status: string;
+  signers: Array<{
+    email: string;
+    name: string;
+    status: string;
+    signedDate?: Date;
+  }>;
+}
+
+interface DocuSignInfo {
+  envelopeId: string;
+  status: string;
+}
 
 @Injectable()
 export class AgreementsService {
@@ -150,21 +172,19 @@ export class AgreementsService {
     });
   }
 
-
-
   private generateAgreementHtml(template, sections, signatureLocations) {
     marked.setOptions({
-        gfm: true,
-        breaks: true,
-        // smartLists: true,
-        // smartypants: true,
-      });
+      gfm: true,
+      breaks: true,
+      // smartLists: true,
+      // smartypants: true,
+    });
 
-      const renderer = new marked.Renderer();
+    const renderer = new marked.Renderer();
     //   renderer.heading = (text, level) => {
-        // return `<h${level}>${text}</h${level}>`;
+    // return `<h${level}>${text}</h${level}>`;
     //   };
-      marked.use({ renderer });
+    marked.use({ renderer });
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -224,7 +244,27 @@ export class AgreementsService {
 
     return htmlContent;
   }
+  async findAgreementByUserIdAndAgreementId(
+    userId: string,
+    agreemetId: string,
+  ) {
+    return this.agreementModel.findOne({ userId, _id: agreemetId });
+  }
+
   async findAgreementByUserId(userId: string) {
-    return this.agreementModel.find({ userId }).exec();
+    return this.agreementModel.find({ userId: userId });
+  }
+  // Add this to your AgreementsService class
+  async updateDocuSignInfo(agreementId: string, docuSignInfo: DocuSignInfo) {
+    return this.agreementModel.findByIdAndUpdate(
+      agreementId,
+      {
+        $set: {
+          'metadata.docuSignEnvelopeId': docuSignInfo.envelopeId,
+          'metadata.docuSignStatus': docuSignInfo.status,
+        },
+      },
+      { new: true },
+    );
   }
 }
