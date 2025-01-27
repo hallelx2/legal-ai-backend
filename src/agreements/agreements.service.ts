@@ -191,4 +191,7 @@ export class AgreementsService {
 
     return htmlContent;
   }
+  async findAgreementByUserId(userId: string) {
+    return this.agreementModel.find({ userId }).exec();
+  }
 }

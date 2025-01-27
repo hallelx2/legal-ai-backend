@@ -44,6 +44,13 @@ export class AgreementsController {
     return this.agreementsService.findById(id);
   }
 
+  @Get('user/:userId')
+  @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Retrieve all agreements for a user' })
+  async findByUserId(@Param('userId') userId: string) {
+    return this.agreementsService.findAgreementByUserId(userId);
+  }
+
   @Put(':id/status')
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Update agreement status' })
