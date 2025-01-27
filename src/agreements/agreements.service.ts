@@ -26,6 +26,8 @@ export class AgreementsService {
     const template = await this.templatesService.getTemplateById(
       dto.templateId,
     );
+    console.log(dto.sections)
+    console.log(dto.signatureLocations)
 
     // Validate input against template
     this.validateInputAgainstTemplate(template, dto);
