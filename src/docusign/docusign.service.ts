@@ -6,7 +6,7 @@ import { AuthToken } from './auth-token-schema';
 import { CodeDto } from './docusign.controller';
 import { AgreementsService } from 'src/agreements/agreements.service';
 import * as docusign from 'docusign-esign';
-import * as puppeteer from 'puppeteer';
+// import * as puppeteer from 'puppeteer';
 
 interface EnvelopeStatus {
   envelopeId: string;
