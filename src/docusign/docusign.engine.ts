@@ -7,7 +7,12 @@ import * as path from 'path';
 @Injectable()
 export class TemplateEngine implements OnModuleInit {
   private templates: Map<string, Handlebars.TemplateDelegate> = new Map();
-  private readonly templatesPath = path.join(process.cwd(), 'src', 'docusign', 'templates');
+  private readonly templatesPath = path.join(
+    process.cwd(),
+    'src',
+    'docusign',
+    'templates',
+  );
 
   // Initialize when the module starts
   async onModuleInit() {
@@ -17,12 +22,12 @@ export class TemplateEngine implements OnModuleInit {
 
   private registerHelpers() {
     // Add helpful Handlebars helpers
-    Handlebars.registerHelper('formatDate', function(date) {
+    Handlebars.registerHelper('formatDate', function (date) {
       return new Date(date).toLocaleDateString();
     });
 
-    Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
+      return arg1 == arg2 ? options.fn(this) : options.inverse(this);
     });
   }
 
@@ -31,23 +36,22 @@ export class TemplateEngine implements OnModuleInit {
       // Load partial templates first
       const headerContent = await fs.readFile(
         path.join(this.templatesPath, 'header.hbs'),
-        'utf-8'
+        'utf-8',
       );
       Handlebars.registerPartial('header', headerContent);
 
       const metadataContent = await fs.readFile(
         path.join(this.templatesPath, 'metadata.hbs'),
-        'utf-8'
+        'utf-8',
       );
       Handlebars.registerPartial('metadata', metadataContent);
 
       // Load the main template
       const modernTemplate = await fs.readFile(
         path.join(this.templatesPath, 'modern.hbs'),
-        'utf-8'
+        'utf-8',
       );
       this.templates.set('modern', Handlebars.compile(modernTemplate));
-
     } catch (error) {
       console.error('Error loading templates:', error);
       throw new Error('Failed to load templates');

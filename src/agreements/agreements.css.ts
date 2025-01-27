@@ -1,10 +1,5 @@
-// src/templates/agreements/modern.hbs
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>{{agreement.name}}</title>
-  <style>
+export const agreementCss = `
+ <style>
     /* Modern, Professional Typography */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -170,47 +165,4 @@
       }
     }
   </style>
-</head>
-<body>
-  <div class="document-header">
-    <h1>{{agreement.name}}</h1>
-    <div class="document-meta">
-      <span>Version: {{agreement.version}}</span>
-      <span>Jurisdiction: {{agreement.metadata.jurisdiction}}</span>
-      <span>Date: {{formatDate agreement.metadata.createdAt}}</span>
-    </div>
-  </div>
-
-  {{#each agreement.sections}}
-    <div class="section" data-section-id="{{id}}">
-      <h2>{{title}}</h2>
-      <div class="section-content">
-        {{{content}}}
-      </div>
-    </div>
-  {{/each}}
-
-  <div class="signature-section">
-    <h2>Signatures</h2>
-    {{#each agreement.signatureLocations}}
-      <div class="signature-container">
-        <div class="signature-details">
-          <strong>{{role}}</strong>
-          <br>
-          {{email}}
-          {{#if required}}
-            <span class="required-badge">Required</span>
-          {{/if}}
-        </div>
-        <div class="signature-line"></div>
-        <div class="signature-details">Date: _________________</div>
-      </div>
-    {{/each}}
-  </div>
-
-  <div class="document-footer">
-    <p>This document is legally binding upon signature of all required parties.</p>
-    <p>Generated on {{formatDate currentDate}}</p>
-  </div>
-</body>
-</html>
+`;

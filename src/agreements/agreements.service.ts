@@ -152,9 +152,13 @@ export class AgreementsService {
     const agreementCSS = 'AgreementCss'; // CSS remains the same
 
     const htmlContent = `
-      <head> 
+    <!DOCTYPE html>
+    <html>
+    <head> 
       ${agreementCSS}
       </head> 
+      <body>
+      
       <div class="agreement-container">
         <h1>${template.name}</h1>
         <p>Version: ${template.version}</p>
@@ -190,6 +194,8 @@ export class AgreementsService {
             .join('')}
         </div>
       </div>
+      </body>
+      </html>
     `;
 
     return htmlContent;
