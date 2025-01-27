@@ -5,7 +5,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model} from 'mongoose';
 import { AgreementDocument, Agreement } from './schemas/agreement.schemas';
 import { AgreementGenerationDto } from './dto/create-agreement.dto';
 import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
@@ -48,6 +48,8 @@ export class AgreementsService {
     const template = await this.templatesService.getTemplateById(
       dto.templateId,
     );
+    console.log(dto.sections)
+    console.log(dto.signatureLocations)
 
     // Validate input against template
     this.validateInputAgainstTemplate(template, dto);

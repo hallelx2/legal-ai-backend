@@ -32,8 +32,6 @@ export class DocusignService {
 
   async createToken(CodeDto: CodeDto) {
     const authorization = btoa(`${this.CLIENT_ID}:${this.CLIENT_SECRET}`);
-    console.log(authorization);
-    console.log(CodeDto.code);
     try {
       const response = await fetch(
         `https://account-d.docusign.com/oauth/token`,
@@ -56,7 +54,6 @@ export class DocusignService {
         throw new Error('code expired');
       }
       const data = await response.json();
-      console.log(data);
       return await this.saveTokens(
         CodeDto.user_id,
         data.access_token,
