@@ -9,7 +9,8 @@ import { AgreementDocument, Agreement } from './schemas/agreement.schemas';
 import { AgreementGenerationDto } from './dto/create-agreement.dto';
 import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
 import { TemplatesService } from 'src/templates/templates.service';
-
+import { agreementCss } from './agreements.css';
+import { marked } from 'marked';
 
 @Injectable()
 export class AgreementsService {
@@ -147,53 +148,74 @@ export class AgreementsService {
     });
   }
 
+
+
   private generateAgreementHtml(template, sections, signatureLocations) {
-    // HTML generation logic from previous implementation
-    const agreementCSS = 'AgreementCss'; // CSS remains the same
+    marked.setOptions({
+        gfm: true,
+        breaks: true,
+        // smartLists: true,
+        // smartypants: true,
+      });
 
+      const renderer = new marked.Renderer();
+    //   renderer.heading = (text, level) => {
+        // return `<h${level}>${text}</h${level}>`;
+    //   };
+      marked.use({ renderer });
     const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head> 
-      ${agreementCSS}
-      </head> 
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${template.name}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        ${agreementCss}
+      </head>
       <body>
-      
-      <div class="agreement-container">
-        <h1>${template.name}</h1>
-        <p>Version: ${template.version}</p>
-        <p>Jurisdiction: ${template.metadata.jurisdiction}</p>
-
-        ${sections
-          .map(
-            (section) => `
-          <div class="section" data-section-id="${section.id}">
-            <h2>${section.title}</h2>
-            <div class="section-content">
-              ${section.content}
+        <div class="agreement-container">
+          <div class="agreement-header">
+            <h1>${template.name}</h1>
+            <div class="agreement-meta">
+              <span>Version: ${template.version}</span>
+              <span>Jurisdiction: ${template.metadata.jurisdiction}</span>
             </div>
           </div>
-        `,
-          )
-          .join('')}
 
-        <div class="signature-section">
-          ${signatureLocations
+          ${sections
             .map(
-              (loc) => `
-            <div class="signature-container"
-                 style="left: ${loc.x}px; top: ${loc.y}px;">
-              <div class="signature-line"></div>
-              <div class="signature-details">
-                ${loc.role} (${loc.email})
-                ${loc.required ? '(Required)' : '(Optional)'}
+              (section) => `
+            <div class="section" data-section-id="${section.id}">
+              <h2>${section.title}</h2>
+              <div class="section-content">
+                ${marked(section.content)} <!-- Process Markdown here -->
               </div>
             </div>
           `,
             )
             .join('')}
+
+          <div class="signature-section">
+            ${signatureLocations
+              .map(
+                (loc) => `
+              <div class="signature-container"
+                   style="left: ${loc.x}px; top: ${loc.y}px;">
+                <div class="signature-line"></div>
+                <div class="signature-details">
+                  ${loc.role} (${loc.email})
+                  ${loc.required ? '(Required)' : '(Optional)'}
+                </div>
+              </div>
+            `,
+              )
+              .join('')}
+          </div>
+
+          <div class="document-footer">
+            Document generated on ${new Date().toLocaleDateString()}
+          </div>
         </div>
-      </div>
       </body>
       </html>
     `;
