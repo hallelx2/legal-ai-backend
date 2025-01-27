@@ -4,6 +4,7 @@ import { TemplatesController } from './templates.controller';
 import { TemplateBase, TemplateBaseSchema } from './template-base.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { ConfigService } from '@nestjs/config';
     ]),
   ],
   controllers: [TemplatesController],
-  providers: [TemplatesService, ConfigService],
+  providers: [TemplatesService, ConfigService, JwtService],
 })
 export class TemplatesModule {}

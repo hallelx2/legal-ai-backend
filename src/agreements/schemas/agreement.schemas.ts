@@ -6,6 +6,9 @@ export type AgreementDocument = Agreement & Document;
 @Schema({ timestamps: true })
 export class Agreement {
   @Prop({ required: true })
+  userId: string;
+
+  @Prop({ required: true })
   templateId: string;
 
   @Prop({ required: true })

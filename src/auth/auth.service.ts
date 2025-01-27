@@ -46,6 +46,7 @@ export class AuthService {
 
   async login(user: Omit<User, 'password'>): Promise<LoginResponse> {
     const tokens = await this.getTokens(user._id.toString(), user.email);
+    console.log(tokens);
     return {
       ...tokens,
       userId: user._id.toString(),
