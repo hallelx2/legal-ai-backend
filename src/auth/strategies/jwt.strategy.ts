@@ -13,15 +13,14 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       ignoreExpiration: false,
       // Use the secret from environment variables
       secretOrKey: configService.get<string>('JWT_SECRET'),
-      passReqToCallback: true
+      passReqToCallback: true,
     });
   }
 
   // This method is called after token is verified
-  async validate(request: any, payload: any) {
+  async validate(payload: any) {
     // Payload contains the data we included when creating the token
     console.log('JWT Payload:', payload);
-    console.log('Request:', request);
     if (!payload.sub || !payload.email) {
       throw new UnauthorizedException('Invalid token payload');
     }
@@ -29,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     // Return the user object that will be attached to Request
     return {
       userId: payload.sub,
-      email: payload.email
+      email: payload.email,
     };
   }
 }

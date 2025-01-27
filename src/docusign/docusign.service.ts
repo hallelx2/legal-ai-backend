@@ -137,7 +137,7 @@ export class DocusignService {
       const activeToken = await this.authTokenModel.findOne({
         userId,
         expiresAt: { $gt: new Date() },
-      })
+      });
 
       if (!activeToken) {
         const existingToken = await this.authTokenModel.findOne({ userId });

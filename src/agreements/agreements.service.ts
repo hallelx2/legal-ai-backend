@@ -64,6 +64,7 @@ export class AgreementsService {
 
     // Create and save agreement
     const agreementDocument = new this.agreementModel({
+      userId: dto.userId,
       templateId: template.id,
       name: template.name,
       version: template.version,

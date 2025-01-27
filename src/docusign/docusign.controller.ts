@@ -17,8 +17,8 @@ export class CodeDto {
   user_id: string;
 }
 
-export class ConnectedDTO{
-  connected:boolean
+export class ConnectedDTO {
+  connected: boolean;
 }
 
 @Controller('docusign')
@@ -37,8 +37,8 @@ export class DocusignController {
 
   @Get('token/:id')
   async getTokenConnected(@Param('id') id: string): Promise<ConnectedDTO> {
-    const token =await this.docusignService.getActiveTokenForUser(id)
-    if(!token) return {connected:false}
-    return {connected:true}
+    const token = await this.docusignService.getActiveTokenForUser(id);
+    if (!token) return { connected: false };
+    return { connected: true };
   }
 }

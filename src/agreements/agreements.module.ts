@@ -32,7 +32,7 @@ import { JwtService } from '@nestjs/jwt';
     AiGeneratorService,
     TemplatesService,
     OpenaiService,
-    JwtService
+    JwtService,
   ],
   exports: [TemplatesService],
 })

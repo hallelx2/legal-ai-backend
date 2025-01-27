@@ -112,6 +112,13 @@ export class SectionDto {
  */
 export class AgreementGenerationDto {
   @ApiProperty({
+    description: 'Unique identifier of the user adding the templates',
+    example: 'user_id',
+  })
+  @IsString()
+  userId: string;
+
+  @ApiProperty({
     description: 'Unique identifier of the template to be used',
     example: 'nda-template-v1',
   })
