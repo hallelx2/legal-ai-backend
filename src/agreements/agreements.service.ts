@@ -10,6 +10,7 @@ import { AgreementGenerationDto } from './dto/create-agreement.dto';
 import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
 import { TemplatesService } from 'src/templates/templates.service';
 
+
 @Injectable()
 export class AgreementsService {
   constructor(
@@ -148,10 +149,12 @@ export class AgreementsService {
 
   private generateAgreementHtml(template, sections, signatureLocations) {
     // HTML generation logic from previous implementation
-    const agreementCSS = `...`; // CSS remains the same
+    const agreementCSS = 'AgreementCss'; // CSS remains the same
 
     const htmlContent = `
+      <head> 
       ${agreementCSS}
+      </head> 
       <div class="agreement-container">
         <h1>${template.name}</h1>
         <p>Version: ${template.version}</p>
