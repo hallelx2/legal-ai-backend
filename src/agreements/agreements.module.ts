@@ -13,6 +13,8 @@ import {
 } from 'src/templates/template-base.schema';
 import { Agreement, AgreementSchema } from './schemas/agreement.schemas';
 import { JwtService } from '@nestjs/jwt';
+import { DocusignService } from 'src/docusign/docusign.service';
+import { AuthToken, AuthTokenSchema } from 'src/docusign/auth-token-schema';
 
 @Module({
   imports: [
@@ -25,6 +27,9 @@ import { JwtService } from '@nestjs/jwt';
     MongooseModule.forFeature([
       { name: Agreement.name, schema: AgreementSchema },
     ]),
+    MongooseModule.forFeature([
+      { name: AuthToken.name, schema: AuthTokenSchema },
+    ]),
   ],
   controllers: [AgreementsController],
   providers: [
@@ -33,6 +38,7 @@ import { JwtService } from '@nestjs/jwt';
     TemplatesService,
     OpenaiService,
     JwtService,
+    DocusignService,
   ],
   exports: [TemplatesService],
 })
