@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DocusignService } from './docusign.service';
 import { AuthToken, AuthTokenSchema } from './auth-token-schema';
 import { DocusignController } from './docusign.controller';
+import { AgreementsService } from 'src/agreements/agreements.service';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { DocusignController } from './docusign.controller';
     ]),
   ],
   controllers: [DocusignController],
-  providers: [DocusignService],
+  providers: [DocusignService, AgreementsService],
   exports: [DocusignService],
 })
 export class DocusignModule {}

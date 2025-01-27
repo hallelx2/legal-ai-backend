@@ -4,19 +4,39 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthToken } from './auth-token-schema';
 import { CodeDto } from './docusign.controller';
+import { AgreementsService } from 'src/agreements/agreements.service';
+import * as docusign from 'docusign-esign';
+import * as puppeteer from 'puppeteer';
+
+interface EnvelopeStatus {
+    envelopeId: string;
+    status: string;
+    signers: Array<{
+      email: string;
+      name: string;
+      status: string;
+      signedDate?: Date;
+    }>;
+  }
 
 @Injectable()
 export class DocusignService {
+    private apiClient: docusign.ApiClient;
+    private envelopesApi: docusign.EnvelopesApi;
   constructor(
+    private agreementService: AgreementsService,
     @InjectModel(AuthToken.name)
     private authTokenModel: Model<AuthToken>,
+
   ) {}
 
   private readonly CLIENT_ID = process.env.DOCUSIGN_CLIENT_ID;
   private readonly CLIENT_SECRET = process.env.DOCUSIGN_CLIENT_SECRET;
   private readonly REDIRECT_URI = process.env.DOCUSIGN_REDIRECT_URI;
   private readonly AUTH_SERVER =
-    process.env.DOCUSIGN_AUTH_SERVER || 'account-d.docusign.com';
+     process.env.DOCUSIGN_AUTH_SERVER || 'account-d.docusign.com';
+
+  
 
   async createToken(CodeDto: CodeDto) {
     const authorization = btoa(`${this.CLIENT_ID}:${this.CLIENT_SECRET}`);
@@ -145,5 +165,16 @@ export class DocusignService {
     } catch (error) {
       return null;
     }
+  }
+  async sendAgreementForSignature(userId: string, agreementId: string) {
+    const token = await this.getActiveTokenForUser(userId);
+    if (!token) {
+      throw new Error('User not connected to Docusign');
+    }
+
+    // Make API call to send agreement for signature
+    // Use the token.accessToken to authenticate the request
+   const  agreement= await this.agreementService.findById(agreementId)
+   const content = agreement.htmlContent
   }
 }
