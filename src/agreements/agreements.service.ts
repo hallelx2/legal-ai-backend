@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model} from 'mongoose';
 import { AgreementDocument, Agreement } from './schemas/agreement.schemas';
 import { AgreementGenerationDto } from './dto/create-agreement.dto';
 import { AiGeneratorService } from 'src/ai-generator/ai-generator.service';
