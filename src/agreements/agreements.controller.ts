@@ -35,7 +35,7 @@ export class AgreementsController {
   ) {}
 
   @Post('generate')
-  @UsePipes(new ValidationPipe({ transform: true }))
+//   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Generate a new agreement',

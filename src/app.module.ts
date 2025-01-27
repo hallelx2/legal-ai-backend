@@ -12,6 +12,7 @@ import { AiGeneratorService } from './ai-generator/ai-generator.service';
 import { OpenaiService } from './openai/openai.service';
 import { DocusignModule } from './docusign/docusign.module';
 import { SendAgreementsService } from './send-agreements/send-agreements.service';
+import { AgreementAgentService } from './agreement-agent/agreement-agent.service';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { SendAgreementsService } from './send-agreements/send-agreements.service
     AiGeneratorService,
     OpenaiService,
     SendAgreementsService,
+    AgreementAgentService,
   ],
 })
 export class AppModule {}
